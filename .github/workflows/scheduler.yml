@@ -1,0 +1,39 @@
+name: Scheduler
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  update-sponsors:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - run: corepack enable
+      - run: pnpm i
+
+      - name: Update sponsors
+        run: npm run build
+        env:
+          SPONSORKIT_GITHUB_TOKEN: ${{ secrets.SPONSORKIT_GITHUB_TOKEN }}
+          SPONSORKIT_GITHUB_LOGIN: swc-project
+          SPONSORKIT_GITHUB_TYPE: organization
+          SPONSORKIT_OPENCOLLECTIVE_KEY: ${{ secrets.SPONSORKIT_OPENCOLLECTIVE_KEY }}
+          SPONSORKIT_OPENCOLLECTIVE_SLUG: swc
+
+      - name: Commit
+        uses: EndBug/add-and-commit@v4
+        with:
+          author_name: SWC Bot
+          author_email: bot@swc.rs
+          message: "chore: update sponsors.svg"
+          add: "sponsors.*"
+        env:
+          GITHUB_TOKEN: ${{ secrets.BOT_GH_TOKEN }}

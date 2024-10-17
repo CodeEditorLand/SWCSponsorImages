@@ -1,37 +1,37 @@
-import { defineConfig, tierPresets } from "sponsorkit";
+import { defineConfig, tierPresets } from 'sponsorkit';
 
-const tiers = [
+const tiers=[
 	{
-		title: "Past Sponsors",
+		title: 'Past Sponsors',
 		monthlyDollars: -1,
 		preset: tierPresets.xs,
 	},
 	{
-		title: "Donors",
+		title: 'Donors',
 		preset: tierPresets.xs,
 	},
 	{
-		title: "Sponsors",
+		title: 'Sponsors',
 		monthlyDollars: 2,
 		preset: tierPresets.base,
 	},
 	{
-		title: "Bronze Sponsors",
+		title: 'Bronze Sponsors',
 		monthlyDollars: 10,
 		preset: tierPresets.medium,
 	},
 	{
-		title: "Silver Sponsors",
+		title: 'Silver Sponsors',
 		monthlyDollars: 25,
 		preset: tierPresets.large,
 	},
 	{
-		title: "Gold Sponsors",
+		title: 'Gold Sponsors',
 		monthlyDollars: 100,
 		preset: tierPresets.large,
 	},
 	{
-		title: "Premium Sponsors",
+		title: 'Premium Sponsors',
 		monthlyDollars: 300,
 		preset: tierPresets.xl,
 	},
@@ -40,25 +40,26 @@ const tiers = [
 export default defineConfig({
 	// Providers configs
 	github: {
-		type: "organization",
-		login: "swc-project",
+		type: 'organization',
+		login: 'swc-project',
 	},
 	opencollective: {
-		slug: "swc",
+		slug: 'swc'
 	},
 
 	renders: [
 		{
-			name: "sponsors",
+			name: 'sponsors',
 			width: 800,
-			formats: ["svg", "png"],
+			formats: ['svg','png'],
 			tiers,
 		},
 		{
-			name: "sponsors.wide",
+			name: 'sponsors.wide',
 			width: 1800,
-			formats: ["svg", "png"],
+			formats: ['svg','png'],
 			tiers,
 		},
+		
 	],
 });
